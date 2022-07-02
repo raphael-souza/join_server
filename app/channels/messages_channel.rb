@@ -1,6 +1,6 @@
-class ChatMessageChannel < ApplicationCable::Channel
+class MessagesChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from esperar receber uma string como argumento, enquanto stream_forespera um objeto do modelo.
+    # stream_from "some_channel" 
     conversation = Conversation.find(params[:conversation])
     stream_for conversation
   end
@@ -8,5 +8,4 @@ class ChatMessageChannel < ApplicationCable::Channel
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
   end
-
 end
