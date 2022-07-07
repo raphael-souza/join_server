@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :conversations, only: [:index, :create]
   resources :messages
+  resources :users, only: [:index, :create]
 
   # namespace :api, defaults: { format: :json } do
   #   resources :users
