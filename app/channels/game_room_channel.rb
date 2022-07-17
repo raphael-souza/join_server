@@ -1,6 +1,11 @@
 class GameRoomChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "game_room_#{params[:room]}"
+    user_params = params[:data]
+    stream_from "game_room_#{user_params}"
+ 
+    user = User.find_or_create_by(user_params) 
+    ActionCable.server.broadcast("game_room_#{user.id}", "#{user.name} Acabou de entrar na sala!")
+
   end
 
   def unsubscribed

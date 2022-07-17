@@ -5,9 +5,15 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  require 'sidekiq/web'
+  Rails.application.routes.draw do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   resources :conversations, only: [:index, :create]
   resources :messages
   resources :users, only: [:index, :create]
+  resources :move_players, only: [:create]
 
   # namespace :api, defaults: { format: :json } do
   #   resources :users

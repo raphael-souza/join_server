@@ -5,17 +5,19 @@ class UsersController < ApplicationController
   end
 
   def create 
-    ActionCable.server.broadcast("game_room_1", {position: params[:user]})
+    ActionCable.server.broadcast("game_room_1", params[:data])
+    
     # user = User.new(user_params)
+    
     # if user.save      
     #   serialized_data = ActiveModelSerializers::Adapter::Json.new(
     #     UserSerializer.new(user)
     #   ).serializable_hash
  
     #   ActionCable.server.broadcast('GameRoomChannel', {ssssss:'serialized_data'}) 
-    #   head :ok
     # end
-
+    
+    head :ok
   end
 
   def user_params
