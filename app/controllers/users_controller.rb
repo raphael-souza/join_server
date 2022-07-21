@@ -1,23 +1,23 @@
 class UsersController < ApplicationController
 
-  def index
+  def index 
+    users = User.all
+    render json: users, status: :ok
 
   end
 
-  def create 
-    ActionCable.server.broadcast("game_room_1", params[:data])
+  def create     
+    user = User.new(user_params)
+    debugger 
+    if user.save      
+      serialized_data = ActiveModelSerializers::Adapter::Json.new(
+        UserSerializer.new(user)
+      ).serializable_hash
     
-    # user = User.new(user_params)
-    
-    # if user.save      
-    #   serialized_data = ActiveModelSerializers::Adapter::Json.new(
-    #     UserSerializer.new(user)
-    #   ).serializable_hash
- 
-    #   ActionCable.server.broadcast('GameRoomChannel', {ssssss:'serialized_data'}) 
-    # end
-    
-    head :ok
+      render json: user, status: :ok
+    else
+      render json: user.errors, status: 404
+    end
   end
 
   def user_params
