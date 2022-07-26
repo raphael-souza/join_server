@@ -18,6 +18,11 @@ gem 'redis-rails', '~> 5.0', '>= 5.0.1'
 # processos async
 gem 'sidekiq'
 
+# autenticação de usuários
+gem 'devise', '~> 4.2'
+gem 'devise-jwt'
+
+gem 'fast_jsonapi'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -36,6 +41,14 @@ gem 'rack-cors'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  
+  gem 'rspec-rails'
+  
+  gem 'factory_bot_rails'
+
+  gem 'faker'
+
+  gem 'jsonapi-rspec'
 end
 
 group :development do
